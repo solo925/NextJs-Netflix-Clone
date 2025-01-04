@@ -1,16 +1,11 @@
 "use client";
 
-import { Media } from "@/types";
+import { BannerProps } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 
-
-
-interface BannerProps {
-  medias: Media[];
-}
 
 const baseUrl = "https://image.tmdb.org/t/p/original";
 

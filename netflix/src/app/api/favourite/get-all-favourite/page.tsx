@@ -1,5 +1,6 @@
 import connectToDB from "@/database";
 import Favorites from "@/models/Favorite";
+import { Favorite } from "@/types";
 import { NextResponse } from "next/server";
 
 
@@ -29,7 +30,7 @@ export async function GET(req: Request): Promise<NextResponse> {
     }
 
     
-    const getAllFavorites = await Favorites.find({ uid: id, accountID });
+    const getAllFavorites:Favorite[] = await Favorites.find({ uid: id, accountID });
 
     if (getAllFavorites) {
       return NextResponse.json({

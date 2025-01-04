@@ -1,31 +1,9 @@
 "use client";
 
 import CircleLoader from "@/componets/circle-loader";
+import { GlobalContextType } from "@/types";
 import { useSession } from "next-auth/react";
 import { createContext, ReactNode, useEffect, useState } from "react";
-
-interface GlobalContextType {
-  loggedInAccount: any;
-  setLoggedInAccount: (value: any) => void;
-  accounts: any[];
-  setAccounts: (accounts: any[]) => void;
-  pageLoader: boolean;
-  setPageLoader: (value: boolean) => void;
-  mediaData: any[];
-  setMediaData: (data: any[]) => void;
-  searchResults: any[];
-  setSearchResults: (results: any[]) => void;
-  currentMediaInfoIdAndType: any | null;
-  setCurrentMediaInfoIdAndType: (value: any | null) => void;
-  showDetailsPopup: boolean;
-  setShowDetailsPopup: (value: boolean) => void;
-  mediaDetails: any | null;
-  setMediaDetails: (details: any | null) => void;
-  similarMedias: any[];
-  setSimilarMedias: (medias: any[]) => void;
-  favorites: any[];
-  setFavorites: (favorites: any[]) => void;
-}
 
 export const GlobalContext = createContext<GlobalContextType | null>(null);
 

@@ -1,19 +1,8 @@
 "use client";
 
+import { AccountPopupProps } from "@/types";
 import React from "react";
 
-interface Account {
-  _id: string;
-  name: string;
-}
-
-interface AccountPopupProps {
-  accounts: Account[];
-  setLoggedInAccount: (account: Account | null) => void;
-  signOut: () => void;
-  loggedInAccount: Account | null;
-  setPageLoader: (loaderState: boolean) => void;
-}
 
 const AccountPopup: React.FC<AccountPopupProps> = ({
   accounts,

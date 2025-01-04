@@ -1,11 +1,12 @@
 "use client";
 
 import { GlobalContext } from "@/context";
+import { Media } from "@/types";
 import { getAllfavorites } from "@/utils";
 import {
-    CheckIcon,
-    ChevronDownIcon,
-    PlusIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  PlusIcon,
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
@@ -16,15 +17,6 @@ import { useContext } from "react";
 const baseUrl = "https://image.tmdb.org/t/p/w500";
 
 
-interface Media {
-  id: string;
-  movieID?: string;
-  backdrop_path: string | null;
-  poster_path: string | null;
-  type?: string;
-  addedToFavorites?: boolean;
-  [key: string]: any;
-}
 
 interface MediaItemProps {
   media: Media;
@@ -58,7 +50,7 @@ export default function MediaItem({
 
   const { data: session } = useSession();
 
-  // Fetch all favorites
+ 
   async function updateFavorites() {
     const res = await getAllfavorites(session?.user?.uid!, loggedInAccount?._id);
     if (res)

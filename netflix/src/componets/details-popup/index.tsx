@@ -1,6 +1,7 @@
 "use client";
 
 import { GlobalContext } from "@/context";
+import { DetailsPopupProps } from "@/types";
 import { getAllfavorites, getSimilarTVorMovies, getTVorMovieDetailsByID } from "@/utils";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import MuiModal from "@mui/material/Modal";
@@ -12,26 +13,6 @@ import { AiFillPlayCircle } from "react-icons/ai";
 import ReactPlayer from "react-player";
 import MediaItem from "../media-item/page";
 
-
-interface DetailsPopupProps {
-  show: boolean;
-  setShow: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-interface MediaDetails {
-  release_date?: string;
-  videos?: {
-    results: { type: string; key: string }[];
-  };
-  
-}
-
-interface SimilarMedia {
-  id: number;
-  backdrop_path: string | null;
-  poster_path: string | null;
-
-}
 
 export default function DetailsPopup({ show, setShow }: DetailsPopupProps) {
   const {

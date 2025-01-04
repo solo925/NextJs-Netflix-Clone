@@ -1,20 +1,10 @@
-import { Media } from "@/types";
+import { CommonLayoutProps } from "@/types";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Banner from "../banner";
 import MediaRow from "../media-row/page";
 import Navbar from "../navbar";
 
-
-
-interface MediaRowData {
-  title: string;
-  medias: Media[];
-}
-
-interface CommonLayoutProps {
-  mediaData: MediaRowData[];
-}
 
 export default function CommonLayout({ mediaData }: CommonLayoutProps) {
   const processedMediaData = mediaData.map((item) => ({

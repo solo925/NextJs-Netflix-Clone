@@ -1,6 +1,7 @@
 "use client";
 
 import { GlobalContext } from "@/context";
+import { MenuItem } from "@/types";
 import { signOut, useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
@@ -10,12 +11,6 @@ import DetailsPopup from "../details-popup";
 import AccountPopup from "./account-popup";
 import Search from "./search";
 
-// Define types for menu items
-interface MenuItem {
-  id: string;
-  title: string;
-  path: string;
-}
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -26,7 +21,6 @@ export default function Navbar() {
   const router = useRouter();
   const pathName = usePathname();
 
-  // Type the context
   const {
     setPageLoader,
     loggedInAccount,
@@ -161,7 +155,7 @@ export default function Navbar() {
           </div>
         </div>
       </header>
-      <DetailsPopup show={showDetailsPopup} setShow={setShowDetailsPopup} />
+      <DetailsPopup show={showDetailsPopup} setShow={setShowDetailsPopup as React.Dispatch<React.SetStateAction<boolean>>} />
       {showAccountPopup && (
         <AccountPopup
           accounts={accounts}

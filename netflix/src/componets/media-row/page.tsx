@@ -1,14 +1,7 @@
 "use client";
 
-import { Media } from "@/types";
+import { MediaRowProps } from "@/types";
 import MediaItem from "../media-item/page";
-
-
-
-interface MediaRowProps {
-  title: string;
-  medias: Media[];
-}
 
 export default function MediaRow({ title, medias }: MediaRowProps) {
   return (
