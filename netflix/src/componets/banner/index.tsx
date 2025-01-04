@@ -1,21 +1,12 @@
 "use client";
 
+import { Media } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 
 
-interface Media {
-  id: string;
-  type: string;
-  title?: string;
-  name?: string;
-  original_name?: string;
-  backdrop_path?: string;
-  poster_path?: string;
-  overview?: string;
-}
 
 interface BannerProps {
   medias: Media[];

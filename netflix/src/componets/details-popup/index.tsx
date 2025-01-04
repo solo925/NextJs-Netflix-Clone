@@ -10,9 +10,9 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import ReactPlayer from "react-player";
-import MediaItem from "../media-item";
+import MediaItem from "../media-item/page";
 
-// Define types for the props
+
 interface DetailsPopupProps {
   show: boolean;
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,14 +23,14 @@ interface MediaDetails {
   videos?: {
     results: { type: string; key: string }[];
   };
-  // other media details...
+  
 }
 
 interface SimilarMedia {
   id: number;
   backdrop_path: string | null;
   poster_path: string | null;
-  // other properties of similar media...
+
 }
 
 export default function DetailsPopup({ show, setShow }: DetailsPopupProps) {
@@ -42,7 +42,7 @@ export default function DetailsPopup({ show, setShow }: DetailsPopupProps) {
     currentMediaInfoIdAndType,
     setCurrentMediaInfoIdAndType,
     loggedInAccount,
-  } = useContext(GlobalContext);
+  } = useContext(GlobalContext)!;
 
   const [key, setKey] = useState<string>("");
   const router = useRouter();
@@ -62,18 +62,18 @@ export default function DetailsPopup({ show, setShow }: DetailsPopupProps) {
         );
 
         const allFavorites = await getAllfavorites(
-          session?.user?.uid,
+          session?.user?.uid!,
           loggedInAccount?._id
         );
 
         const findIndexOfTrailer =
           extractMediaDetails?.videos?.results?.findIndex(
-            (item) => item.type === "Trailer"
+            (item:any) => item.type === "Trailer"
           ) ?? -1;
 
         const findIndexOfClip =
           extractMediaDetails?.videos?.results?.findIndex(
-            (item) => item.type === "Clip"
+            (item:any) => item.type === "Clip"
           ) ?? -1;
 
         setMediaDetails(extractMediaDetails);
@@ -86,11 +86,11 @@ export default function DetailsPopup({ show, setShow }: DetailsPopupProps) {
         );
 
         setSimilarMedias(
-          extractSimilarMovies.map((item) => ({
+          extractSimilarMovies!.map((item) => ({
             ...item,
             type: currentMediaInfoIdAndType?.type === "movie" ? "movie" : "tv",
             addedToFavorites:
-              allFavorites?.some((fav) => fav.movieID === item.id) ?? false,
+              allFavorites?.some((fav:any) => fav.movieID === item.id) ?? false,
           }))
         );
       }
@@ -158,7 +158,7 @@ export default function DetailsPopup({ show, setShow }: DetailsPopupProps) {
                 <span>
                   {mediaDetails?.release_date
                     ? mediaDetails?.release_date.split("-")[0]
-                    : "2023"}
+                    : "2025"}
                 </span>
                 <div className="inline-flex border-2 border-white/40 rounded px-2">
                   HD

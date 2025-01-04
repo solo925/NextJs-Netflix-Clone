@@ -1,5 +1,4 @@
-"use client";
-
+import { Media } from "@/types";
 import { motion } from "framer-motion";
 import Head from "next/head";
 import Banner from "../banner";
@@ -7,18 +6,6 @@ import MediaRow from "../media-row/page";
 import Navbar from "../navbar";
 
 
-
-// Define the type for the media object in the mediaData array
-interface Media {
-  id: string;
-  type: string;
-  title?: string;
-  name?: string;
-  original_name?: string;
-  backdrop_path?: string;
-  poster_path?: string;
-  overview?: string;
-}
 
 interface MediaRowData {
   title: string;
@@ -30,6 +17,14 @@ interface CommonLayoutProps {
 }
 
 export default function CommonLayout({ mediaData }: CommonLayoutProps) {
+  const processedMediaData = mediaData.map((item) => ({
+    ...item,
+    medias: item.medias.map((media) => ({
+      ...media,
+      backdrop_path: media.backdrop_path ?? null, 
+    })),
+  }));
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -38,20 +33,17 @@ export default function CommonLayout({ mediaData }: CommonLayoutProps) {
     >
       <Head>
         <title>Netflix Clone</title>
-        {/* to do -> to add all other properties */}
       </Head>
       <>
         <Navbar />
         <div className="relative pl-4 pb-24 lg:space-y-24">
           <Banner
-            medias={mediaData && mediaData.length ? mediaData[0].medias : []}
+            medias={processedMediaData.length ? processedMediaData[0].medias : []}
           />
           <section className="md:space-y-16">
-            {mediaData && mediaData.length
-              ? mediaData.map((item) => (
-                  <MediaRow key={item.title} title={item.title} medias={item.medias} />
-                ))
-              : null}
+            {processedMediaData.map((item) => (
+              <MediaRow key={item.title} title={item.title} medias={item.medias} />
+            ))}
           </section>
         </div>
       </>
